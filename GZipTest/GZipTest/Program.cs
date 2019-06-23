@@ -11,7 +11,7 @@ namespace GZipTest
         private static readonly Logger logger = new Logger();
         static int Main(string[] args)
         {
-            return TestRun(args);
+            return Run(args);
         }
 
         private static int Run(string[] args)
@@ -22,47 +22,6 @@ namespace GZipTest
                     (DecompressOptions o) => Decompress(o),
                     HandleErrors);
             return result;
-        }
-
-        private static int TestRun(string[] args)
-        {
-            while (true)
-            {
-                Console.WriteLine($"Choose:\r\n1 compress\r\n2 decompress\r\nOtherwise exit");
-                var input = Console.ReadKey();
-                int result;
-                if (input.KeyChar == '1')
-                {
-                    args = new[]
-                    {
-                        "compress",
-                         "d:\\TempVeeam\\Fantom.avi",
-                         $"d:\\TempVeeam\\Fantom{DateTime.Now:HH}.avi.gz"
-                     };
-                    Console.Clear();
-                    result = Run(args);
-
-                }
-                else if (input.KeyChar == '2')
-                {
-                    args = new[]
-                    {
-                        "decompress",
-                        $"d:\\TempVeeam\\Fantom{DateTime.Now:HH}.avi.gz",
-                        $"d:\\TempVeeam\\Fantom{DateTime.Now:HH}.avi"
-                     };
-                    Console.Clear();
-                    result = Run(args);
-
-                }
-                else
-                {
-                    return 0;
-                }
-                Console.WriteLine($"Retuned {result}\r\nPress enter to continue ...");
-                Console.ReadLine();
-                Console.Clear();
-            }
         }
 
         private static int Compress(CompressOptions options)
