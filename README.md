@@ -57,6 +57,6 @@ Write functionality takes blocks from second blocking collection in order how th
 
 #### File format
 
-Compressed file is in GZip standard, containg custom EXTRA field with ID "Ch" (as Charvat :smile:). This field contains length of compressed block, for easier reading of blocks by Decompressor reader
+Compressed file is in GZip standard, containg custom EXTRA field with ID "Ch". This field contains length of compressed block, for easier reading of blocks by Decompressor reader
 Decompressor can only decompress GZip files maded by this program.
 
