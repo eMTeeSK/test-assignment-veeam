@@ -4,7 +4,7 @@ using System.IO.Compression;
 
 namespace GZipTest.Core.Processors
 {
-    internal class DecompressionProcessor : ProcessorBase
+    internal sealed class DecompressionProcessor : ProcessorBase
     {
         const int readBufferSize = 8192;
 

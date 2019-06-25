@@ -1,6 +1,6 @@
 ## Test assignment for Veeam
 
-# Assignment
+### Assignment
 
 Implement a command line tool using C# for block-by-block compressing and decompressing of files using
 class System.IO.Compression.GzipStream.
@@ -30,3 +30,33 @@ On success program should return 0, otherwise 1.
 no requirement for archive file to be compatible with GZIP file format.
 Please send us solution source files and Visual Studio project. Briefly describe architecture and algorithms
 used.
+
+### Solution
+
+Solution is splitted in two projects, one handling console UI, second `GZipTest.Core` handles functionality.  
+`GZipTest.Core` contains two visible items:
+ *  `Comprimator` - wraps and handles comprimation and decomprimation
+ *  `ILogger` - Interface for providing UI output from comprimation process, like progress, messages and errors.
+
+Comprimation (and decomprimation) is handled by "Processor" classes:
+ *  `CompressionProcessor` - for comprimation
+ *  `DecompressionProcessor` - for decomprimation  
+Both are derivated from `ProcessorBase`, where magic is done. In children, there are only overrides for specific functionality which differs between comprimation and decomprimation.
+
+#### Threads
+
+`ProcessorBase` uses 4 different functionalities (types of thread functions):
+ 1.  Reader thread - reads input file, block by block to memory and fills two BlockingCollections (hope they are allowed):  
+      *  One for processing
+      *  Second for writing
+ 1.  Processing threads - number of threads is based on count of cores in PC  
+Processing threads taking blocks from 1st blocking collection, using GZipStream (de)compress data from source MemoryStream to target memory stream, and marks `Block` as ready for write
+ 1.  Writer - writing of blocks to target file is processed in main thread.  
+Write functionality takes blocks from second blocking collection in order how they were readed. To ensure, that block is already processes, write function waits until is "marked" for write, using `ManualResetEvent`.
+ 1.  Printer thread - handles progress propagation to UI through `ILogger`
+
+#### File format
+
+Compressed file is in GZip standard, containg custom EXTRA field with ID "Ch" (as Charvat :smile:). This field contains length of compressed block, for easier reading of blocks by Decompressor reader
+Decompressor can only decompress GZip files maded by this program.
+

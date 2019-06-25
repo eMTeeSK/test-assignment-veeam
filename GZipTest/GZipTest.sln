@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZipTest", "GZipTest\GZipTest.csproj", "{6618F349-C676-4318-A2F7-9BA4485C164E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GZipTest", "GZipTest\GZipTest.csproj", "{6618F349-C676-4318-A2F7-9BA4485C164E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZipTest.Core", "GZipTest.Core\GZipTest.Core.csproj", "{E387C631-255B-4E80-B63D-6735DC0E5A50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GZipTest.Core", "GZipTest.Core\GZipTest.Core.csproj", "{E387C631-255B-4E80-B63D-6735DC0E5A50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{859D9530-296C-4172-BC1F-1850BE300278}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

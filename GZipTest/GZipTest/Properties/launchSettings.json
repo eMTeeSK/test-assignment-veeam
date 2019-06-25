@@ -2,7 +2,7 @@
   "profiles": {
     "GZipTest": {
       "commandName": "Project",
-      "commandLineArgs": "compress d:\\TempVeeam\\Fantom "
+      "commandLineArgs": "decompress --help"
     }
   }
 }

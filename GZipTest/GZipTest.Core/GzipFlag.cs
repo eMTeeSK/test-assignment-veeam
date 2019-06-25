@@ -3,7 +3,7 @@
 namespace GZipTest.Core
 {
     [Flags]
-    public enum GzipFlag
+    internal enum GzipFlag
     {
         FTEXT = 1,
         FHCRC = 2,

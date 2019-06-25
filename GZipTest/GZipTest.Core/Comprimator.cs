@@ -4,24 +4,23 @@ using System.IO;
 
 namespace GZipTest.Core
 {
-    public class Compressor
+    public class Comprimator
     {
         private readonly int _blockSize;
         private readonly ILogger _logger;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Compressor"/> class.
+        /// Initializes a new instance of the <see cref="Comprimator"/> class.
         /// </summary>
         /// <param name="blockSize">Size of the block in MB.</param>
-        public Compressor(ILogger logger, int blockSize = 1)
+        public Comprimator(ILogger logger, int blockSize = 1)
         {
             if (logger == null)
                 throw new ArgumentNullException(nameof(logger));
 
 
             this._blockSize = blockSize * 1024 * 1024;
-            //this._blockSize = 1024 * 20; //20kB
             this._logger = logger;
         }
 
@@ -55,7 +54,7 @@ namespace GZipTest.Core
             {
                 if (!sourceStream.CanRead)
                 {
-                    this._logger.ErrorLog($"Can't read file {sourceFile.FullName}");
+                    this._logger?.ErrorLog($"Can't read file {sourceFile.FullName}");
                     return false;
                 }
                 using (FileStream writeFileStream = File.Create(targetFile.FullName))
@@ -64,7 +63,7 @@ namespace GZipTest.Core
                     processor.Process();
                     writeFileStream.Flush();
                 }
-                this._logger.Log($"Processed {sourceFile.Name} from {sourceFile.Length} to {targetFile.Length} bytes.");
+                this._logger?.Log($"Processed {sourceFile.Name} from {sourceFile.Length} to {targetFile.Length} bytes.");
             }
             return true;
         }
